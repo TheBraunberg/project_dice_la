@@ -41,47 +41,51 @@ namespace DICE_LA_ALPHA
             checkboxarray[17] = checkBox18;
             checkboxarray[18] = checkBox19;
             checkboxarray[19] = checkBox20;
-			for (byte index = 0; index <= 19; index++)
-			{
-				checkboxarray[index].Checked = false;
-			}
+
 			foreach (CheckBox box in checkboxarray) {
                 box.CheckedChanged +=new EventHandler(CheckBoxes_CheckedChanged);
             }
 		}
-
 
         private void CheckBoxes_CheckedChanged(Object sender, EventArgs e)
 		{
 			listBox1.Items.Clear();
 			for (byte index = 0; index <= 19; index++)
 			{
-				controlboolarray[index] = checkboxarray[index].Checked;
-				listBox1.Items.Add(controlboolarray[index]);
+				switch (comboBox1.Text)
+				{
+					case "Горит изначально":
+						defaultboolarray[index] = checkboxarray[index].Checked;
+						listBox1.Items.Add("ГИ "+defaultboolarray[index]);
+						break;
+					case "Храм":
+						templeboolarray[index] = checkboxarray[index].Checked;
+						listBox1.Items.Add("ХР " + defaultboolarray[index]);
+						break;
+				}
 			}
 
 		}
 
-        Func<Boolean, char> convert = x => x == false ? '0' : '1';
-
+		//Func<Boolean, char> convert = x => x==false? '0':'1';
 		private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			switch(comboBox1.Text)
-			{
-				case "Горит изначально":
-					for (byte index = 0; index <= 19; index++)
-					{
-						checkboxarray[index].Checked = defaultboolarray[index];
-						defaultboolarray[index] = controlboolarray[index];
-					}
-					break;
-				case "Храм":
-					for (byte index = 0; index <= 19; index++)
-					{
+			listBox1.Items.Clear();
+			for (byte index = 0; index <= 19; index++) { 
+				switch (comboBox1.Text)
+				{
+					case "Горит изначально":
+						if (checkboxarray[index] != null)
+						{
+							checkboxarray[index].Checked = false;
+							checkboxarray[index].Checked = defaultboolarray[index];
+						}
+						break;
+					case "Храм":
+						checkboxarray[index].Checked = false;
 						checkboxarray[index].Checked = templeboolarray[index];
-						templeboolarray[index] = controlboolarray[index];
-					}
-					break;
+						break;
+				}
 			}
 		}
 	}

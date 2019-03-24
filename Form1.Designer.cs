@@ -498,7 +498,7 @@
 			this.listBox1.FormattingEnabled = true;
 			this.listBox1.Location = new System.Drawing.Point(226, 12);
 			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(74, 264);
+			this.listBox1.Size = new System.Drawing.Size(118, 264);
 			this.listBox1.TabIndex = 42;
 			// 
 			// Form1
