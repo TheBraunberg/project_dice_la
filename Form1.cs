@@ -13,7 +13,9 @@ namespace DICE_LA_ALPHA
 	public partial class Form1 : Form
 	{
 		CheckBox[] checkboxarray = new CheckBox[20];
+		bool[] controlboolarray = new bool[20];
 		bool[] defaultboolarray = new bool[20];
+		bool[] templeboolarray = new bool[20];
 		char[] defaultchararray = new char[20];
         public Form1()
         {
@@ -39,23 +41,47 @@ namespace DICE_LA_ALPHA
             checkboxarray[17] = checkBox18;
             checkboxarray[18] = checkBox19;
             checkboxarray[19] = checkBox20;
-
-            foreach (CheckBox box in checkboxarray) {
-                box.CheckedChanged += new EventHandler(CheckBoxes_CheckedChanged);
+			for (byte index = 0; index <= 19; index++)
+			{
+				checkboxarray[index].Checked = false;
+			}
+			foreach (CheckBox box in checkboxarray) {
+                box.CheckedChanged +=new EventHandler(CheckBoxes_CheckedChanged);
             }
 		}
 
 
-        private void CheckBoxes_CheckedChanged(Object sender, EventArgs e){}
-
-        Func<Boolean, char> convert = x => x == false ? '0' : '1';
-		private void Timer1_Tick(object sender, EventArgs e)
+        private void CheckBoxes_CheckedChanged(Object sender, EventArgs e)
 		{
 			listBox1.Items.Clear();
 			for (byte index = 0; index <= 19; index++)
 			{
-				defaultboolarray[index] = checkboxarray[index].Checked;
-				listBox1.Items.Add(defaultboolarray[index]);
+				controlboolarray[index] = checkboxarray[index].Checked;
+				listBox1.Items.Add(controlboolarray[index]);
+			}
+
+		}
+
+        Func<Boolean, char> convert = x => x == false ? '0' : '1';
+
+		private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			switch(comboBox1.Text)
+			{
+				case "Горит изначально":
+					for (byte index = 0; index <= 19; index++)
+					{
+						checkboxarray[index].Checked = defaultboolarray[index];
+						defaultboolarray[index] = controlboolarray[index];
+					}
+					break;
+				case "Храм":
+					for (byte index = 0; index <= 19; index++)
+					{
+						checkboxarray[index].Checked = templeboolarray[index];
+						templeboolarray[index] = controlboolarray[index];
+					}
+					break;
 			}
 		}
 	}

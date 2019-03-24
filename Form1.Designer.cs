@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			this.checkBox1 = new System.Windows.Forms.CheckBox();
 			this.checkBox2 = new System.Windows.Forms.CheckBox();
 			this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -73,7 +72,6 @@
 			this.label20 = new System.Windows.Forms.Label();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.listBox1 = new System.Windows.Forms.ListBox();
-			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -489,10 +487,11 @@
             "Пирс",
             "Камень",
             "Пагода"});
-			this.comboBox1.Location = new System.Drawing.Point(36, 149);
+			this.comboBox1.Location = new System.Drawing.Point(31, 149);
 			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(131, 21);
+			this.comboBox1.Size = new System.Drawing.Size(139, 21);
 			this.comboBox1.TabIndex = 41;
+			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
 			// 
 			// listBox1
 			// 
@@ -501,11 +500,6 @@
 			this.listBox1.Name = "listBox1";
 			this.listBox1.Size = new System.Drawing.Size(74, 264);
 			this.listBox1.TabIndex = 42;
-			// 
-			// timer1
-			// 
-			this.timer1.Enabled = true;
-			this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
 			// 
 			// Form1
 			// 
@@ -610,7 +604,6 @@
 		private System.Windows.Forms.CheckBox checkBox19;
 		private System.Windows.Forms.CheckBox checkBox20;
 		private System.Windows.Forms.ListBox listBox1;
-		private System.Windows.Forms.Timer timer1;
 	}
 }
 
