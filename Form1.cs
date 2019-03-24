@@ -49,20 +49,25 @@ namespace DICE_LA_ALPHA
 
         private void CheckBoxes_CheckedChanged(Object sender, EventArgs e)
 		{
-			listBox1.Items.Clear();
-			for (byte index = 0; index <= 19; index++)
+			
+			switch (comboBox1.Text)
 			{
-				switch (comboBox1.Text)
-				{
-					case "Горит изначально":
+				case "Горит изначально":
+					listBox1.Items.Clear();
+					for (byte index = 0; index <= 19; index++)
+					{
 						defaultboolarray[index] = checkboxarray[index].Checked;
-						listBox1.Items.Add("ГИ "+defaultboolarray[index]);
-						break;
-					case "Храм":
+						listBox1.Items.Add("ГИ " + defaultboolarray[index]);
+					}
+				break;
+				case "Храм":
+					listBox1.Items.Clear();
+					for (byte index = 0; index <= 19; index++)
+					{
 						templeboolarray[index] = checkboxarray[index].Checked;
-						listBox1.Items.Add("ХР " + defaultboolarray[index]);
-						break;
-				}
+						listBox1.Items.Add("ХР " + templeboolarray[index]);
+					}
+				break;
 			}
 
 		}
@@ -70,8 +75,16 @@ namespace DICE_LA_ALPHA
 		//Func<Boolean, char> convert = x => x==false? '0':'1';
 		private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			foreach (CheckBox box in checkboxarray)
+			{
+				if (box != null)
+				{
+					box.CheckedChanged -= new EventHandler(CheckBoxes_CheckedChanged);
+				}
+			}
 			listBox1.Items.Clear();
-			for (byte index = 0; index <= 19; index++) { 
+			for (byte index = 0; index <= 19; index++)
+			{ 
 				switch (comboBox1.Text)
 				{
 					case "Горит изначально":
@@ -79,12 +92,22 @@ namespace DICE_LA_ALPHA
 						{
 							checkboxarray[index].Checked = false;
 							checkboxarray[index].Checked = defaultboolarray[index];
+							
 						}
+						listBox1.Items.Add("ГИ " + defaultboolarray[index]);
 						break;
 					case "Храм":
 						checkboxarray[index].Checked = false;
 						checkboxarray[index].Checked = templeboolarray[index];
+						listBox1.Items.Add("ХР " + templeboolarray[index]);
 						break;
+				}
+			}
+			foreach (CheckBox box in checkboxarray)
+			{
+				if (box != null)
+				{
+					box.CheckedChanged += new EventHandler(CheckBoxes_CheckedChanged);
 				}
 			}
 		}
