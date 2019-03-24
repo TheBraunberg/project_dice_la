@@ -78,12 +78,13 @@
 			// checkBox1
 			// 
 			this.checkBox1.AutoSize = true;
+			this.checkBox1.BackColor = System.Drawing.SystemColors.Control;
 			this.checkBox1.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.checkBox1.Location = new System.Drawing.Point(31, 28);
 			this.checkBox1.Name = "checkBox1";
 			this.checkBox1.Size = new System.Drawing.Size(15, 14);
 			this.checkBox1.TabIndex = 1;
-			this.checkBox1.UseVisualStyleBackColor = true;
+			this.checkBox1.UseVisualStyleBackColor = false;
 			// 
 			// checkBox2
 			// 
@@ -98,12 +99,13 @@
 			// checkBox3
 			// 
 			this.checkBox3.AutoSize = true;
+			this.checkBox3.BackColor = System.Drawing.SystemColors.Control;
 			this.checkBox3.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.checkBox3.Location = new System.Drawing.Point(73, 28);
 			this.checkBox3.Name = "checkBox3";
 			this.checkBox3.Size = new System.Drawing.Size(15, 14);
 			this.checkBox3.TabIndex = 3;
-			this.checkBox3.UseVisualStyleBackColor = true;
+			this.checkBox3.UseVisualStyleBackColor = false;
 			// 
 			// checkBox4
 			// 

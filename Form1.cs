@@ -49,7 +49,6 @@ namespace DICE_LA_ALPHA
 
         private void CheckBoxes_CheckedChanged(Object sender, EventArgs e)
 		{
-			
 			switch (comboBox1.Text)
 			{
 				case "Горит изначально":
@@ -58,6 +57,14 @@ namespace DICE_LA_ALPHA
 					{
 						defaultboolarray[index] = checkboxarray[index].Checked;
 						listBox1.Items.Add("ГИ " + defaultboolarray[index]);
+						if (checkboxarray[index].Checked == true)
+						{
+							checkboxarray[index].BackColor = Color.Orange;
+						}
+						else
+						{
+							checkboxarray[index].BackColor = SystemColors.Control;
+						}
 					}
 				break;
 				case "Храм":
@@ -92,7 +99,7 @@ namespace DICE_LA_ALPHA
 						{
 							checkboxarray[index].Checked = false;
 							checkboxarray[index].Checked = defaultboolarray[index];
-							
+
 						}
 						listBox1.Items.Add("ГИ " + defaultboolarray[index]);
 						break;
