@@ -13,9 +13,15 @@ namespace DICE_LA_ALPHA
 	public partial class Form1 : Form
 	{
 		CheckBox[] checkboxarray = new CheckBox[20];
-		bool[] controlboolarray = new bool[20];
 		bool[] defaultboolarray = new bool[20];
 		bool[] templeboolarray = new bool[20];
+		bool[] furnaceboolarray = new bool[20];
+		bool[] treeboolarray = new bool[20];
+		bool[] waterfallboolarray = new bool[20];
+		bool[] pierboolarray = new bool[20];
+		bool[] stoneboolarray = new bool[20];
+		bool[] pagodaboolarray = new bool[20];
+
 		char[] defaultchararray = new char[20];
         public Form1()
         {
@@ -49,10 +55,10 @@ namespace DICE_LA_ALPHA
 
         private void CheckBoxes_CheckedChanged(Object sender, EventArgs e)
 		{
+			listBox1.Items.Clear();
 			switch (comboBox1.Text)
 			{
 				case "Горит изначально":
-					listBox1.Items.Clear();
 					for (byte index = 0; index <= 19; index++)
 					{
 						defaultboolarray[index] = checkboxarray[index].Checked;
@@ -66,15 +72,56 @@ namespace DICE_LA_ALPHA
 							checkboxarray[index].BackColor = SystemColors.Control;
 						}
 					}
-				break;
+					break;
 				case "Храм":
-					listBox1.Items.Clear();
 					for (byte index = 0; index <= 19; index++)
 					{
 						templeboolarray[index] = checkboxarray[index].Checked;
 						listBox1.Items.Add("ХР " + templeboolarray[index]);
 					}
-				break;
+					break;
+				case "Печь":
+					for (byte index = 0; index <= 19; index++)
+					{
+						furnaceboolarray[index] = checkboxarray[index].Checked;
+						listBox1.Items.Add("ПЕ " + furnaceboolarray[index]);
+					}
+					break;
+				case "Дерево":
+					for (byte index = 0; index <= 19; index++)
+					{
+						treeboolarray[index] = checkboxarray[index].Checked;
+						listBox1.Items.Add("ДЕ " + treeboolarray[index]);
+					}
+					break;
+				case "Водопад":
+					for (byte index = 0; index <= 19; index++)
+					{
+						waterfallboolarray[index] = checkboxarray[index].Checked;
+						listBox1.Items.Add("ВО " + waterfallboolarray[index]);
+					}
+					break;
+				case "Пирс":
+					for (byte index = 0; index <= 19; index++)
+					{
+						pierboolarray[index] = checkboxarray[index].Checked;
+						listBox1.Items.Add("ПИ " + pierboolarray[index]);
+					}
+					break;
+				case "Камень":
+					for (byte index = 0; index <= 19; index++)
+					{
+						stoneboolarray[index] = checkboxarray[index].Checked;
+						listBox1.Items.Add("КА " + stoneboolarray[index]);
+					}
+					break;
+				case "Пагода":
+					for (byte index = 0; index <= 19; index++)
+					{
+						pagodaboolarray[index] = checkboxarray[index].Checked;
+						listBox1.Items.Add("ПА " + pagodaboolarray[index]);
+					}
+					break;
 			}
 
 		}
@@ -99,7 +146,6 @@ namespace DICE_LA_ALPHA
 						{
 							checkboxarray[index].Checked = false;
 							checkboxarray[index].Checked = defaultboolarray[index];
-
 						}
 						listBox1.Items.Add("ГИ " + defaultboolarray[index]);
 						break;
@@ -107,6 +153,36 @@ namespace DICE_LA_ALPHA
 						checkboxarray[index].Checked = false;
 						checkboxarray[index].Checked = templeboolarray[index];
 						listBox1.Items.Add("ХР " + templeboolarray[index]);
+						break;
+					case "Печь":
+						checkboxarray[index].Checked = false;
+						checkboxarray[index].Checked = furnaceboolarray[index];
+						listBox1.Items.Add("ПЕ " + furnaceboolarray[index]);
+						break;
+					case "Дерево":
+						checkboxarray[index].Checked = false;
+						checkboxarray[index].Checked = treeboolarray[index];
+						listBox1.Items.Add("ДЕ " + treeboolarray[index]);
+						break;
+					case "Водопад":
+						checkboxarray[index].Checked = false;
+						checkboxarray[index].Checked = waterfallboolarray[index];
+						listBox1.Items.Add("ВО " + waterfallboolarray[index]);
+						break;
+					case "Пирс":
+						checkboxarray[index].Checked = false;
+						checkboxarray[index].Checked = pierboolarray[index];
+						listBox1.Items.Add("ПИ " + pierboolarray[index]);
+						break;
+					case "Камень":
+						checkboxarray[index].Checked = false;
+						checkboxarray[index].Checked = stoneboolarray[index];
+						listBox1.Items.Add("КА " + stoneboolarray[index]);
+						break;
+					case "Пагода":
+						checkboxarray[index].Checked = false;
+						checkboxarray[index].Checked = pagodaboolarray[index];
+						listBox1.Items.Add("КА " + pagodaboolarray[index]);
 						break;
 				}
 			}
