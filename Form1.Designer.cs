@@ -72,6 +72,7 @@
 			this.label20 = new System.Windows.Forms.Label();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.listBox1 = new System.Windows.Forms.ListBox();
+			this.button1 = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -503,11 +504,22 @@
 			this.listBox1.Size = new System.Drawing.Size(118, 264);
 			this.listBox1.TabIndex = 42;
 			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(30, 176);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(141, 24);
+			this.button1.TabIndex = 43;
+			this.button1.Text = "Начать перебор";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.Button1_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(571, 418);
+			this.Controls.Add(this.button1);
 			this.Controls.Add(this.listBox1);
 			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.label20);
@@ -551,6 +563,9 @@
 			this.Controls.Add(this.checkBox2);
 			this.Controls.Add(this.checkBox1);
 			this.Controls.Add(this.panel1);
+			this.Cursor = System.Windows.Forms.Cursors.Default;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
 			this.Name = "Form1";
 			this.Text = "Form1";
 			this.panel1.ResumeLayout(false);
@@ -606,6 +621,7 @@
 		private System.Windows.Forms.CheckBox checkBox19;
 		private System.Windows.Forms.CheckBox checkBox20;
 		private System.Windows.Forms.ListBox listBox1;
+		private System.Windows.Forms.Button button1;
 	}
 }
 

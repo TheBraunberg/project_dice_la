@@ -21,8 +21,18 @@ namespace DICE_LA_ALPHA
 		bool[] pierboolarray = new bool[20];
 		bool[] stoneboolarray = new bool[20];
 		bool[] pagodaboolarray = new bool[20];
-
-		char[] defaultchararray = new char[20];
+		//BF это не battlefield, как бы печально это не было, хех, bruteforce (ох уж эти флешбеки с ЕГЭ)
+		//На этом месте илья смотрел на мой код. Привет илья. Иди нахуй
+		//массив копирует оригинальный если на текущей попытке перебора используется эта кнопка, чтобы прибавить все ативные кнопки и понять сколько фонарей загорит в итоге, если очередь не за этой конпкой-массив забит нулями.
+		Byte[] BFtemplearray = new Byte[20];
+		Byte[] BFfurnacearray = new Byte[20];
+		Byte[] BFtreearray = new Byte[20];
+		Byte[] BFwaterfallarray = new Byte[20];
+		Byte[] BFpierarray = new Byte[20];
+		Byte[] BFstonearray = new Byte[20];
+		Byte[] BFpagodaarray = new Byte[20];
+		int[] Bruteforce = new int[20];
+		Byte[] Lampname = new byte[7];
         public Form1()
         {
             InitializeComponent();
@@ -126,7 +136,7 @@ namespace DICE_LA_ALPHA
 
 		}
 
-		//Func<Boolean, char> convert = x => x==false? '0':'1';
+
 		private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			foreach (CheckBox box in checkboxarray)
@@ -182,7 +192,7 @@ namespace DICE_LA_ALPHA
 					case "Пагода":
 						checkboxarray[index].Checked = false;
 						checkboxarray[index].Checked = pagodaboolarray[index];
-						listBox1.Items.Add("КА " + pagodaboolarray[index]);
+						listBox1.Items.Add("ПА " + pagodaboolarray[index]);
 						break;
 				}
 			}
@@ -191,6 +201,233 @@ namespace DICE_LA_ALPHA
 				if (box != null)
 				{
 					box.CheckedChanged += new EventHandler(CheckBoxes_CheckedChanged);
+				}
+			}
+		}
+		//Func<Boolean, char> convert = x => x==false? '0':'1';
+		private void Button1_Click(object sender, EventArgs e)
+		{
+			byte lampon=0;
+			string buttontopress="";
+			bool exit = false;
+			Func<Boolean, char> convert = x => x == false ? '0' : '1';
+			byte i0 = 0;
+			byte i1 = 0;
+			byte i2 = 0;
+			byte i3 = 0;
+			byte i4 = 0;
+			byte i5 = 0;
+			byte i6 = 0;
+			byte i7 = 0;
+			for (i0 = 20; i0 > 0; i0--)
+			{
+				if (exit == true)
+				{
+					break;
+					
+				}
+				for (i1 = 0; i1 <= 1; i1++)
+				{
+					if (i1 == 1)
+					{
+						for (byte index = 0; index <= 19; index++)
+						{
+							BFtemplearray[index] = (Byte) convert(templeboolarray[index]);
+						}
+						Lampname[0] = 1;
+					}
+					else
+					{
+						for (byte index = 0; index <= 19; index++)
+						{
+							BFtemplearray[index] = 0;
+						}
+						Lampname[0] = 0;
+					}
+					for (i2= 0; i2 <= 1; i2++)
+					{
+						if (i2 == 1)
+						{
+							for (byte index = 0; index <= 19; index++)
+							{
+								BFfurnacearray[index] = (Byte)convert(furnaceboolarray[index]);
+							}
+							Lampname[1] = 2;
+						}
+						else
+						{
+							for (byte index = 0; index <= 19; index++)
+							{
+								BFfurnacearray[index] = 0;
+							}
+							Lampname[1] = 0;
+						}
+						for (i3 = 0; i3 <= 1; i3++)
+						{
+							if (i3 == 1)
+							{
+								for (byte index = 0; index <= 19; index++)
+								{
+									BFtreearray[index] = (Byte)convert(treeboolarray[index]);
+								}
+								Lampname[2] = 3;
+							}
+							else
+							{
+								for (byte index = 0; index <= 19; index++)
+								{
+									BFtreearray[index] = 0;
+								}
+								Lampname[2] = 0;
+							}
+							for ( i4 = 0; i4 <= 1; i4++)
+							{
+								if (i4 == 1)
+								{
+									for (byte index = 0; index <= 19; index++)
+									{
+										BFwaterfallarray[index] = (Byte)convert(waterfallboolarray[index]);
+									}
+									Lampname[3] = 4;
+								}
+								else
+								{
+									for (byte index = 0; index <= 19; index++)
+									{
+										BFwaterfallarray[index] = 0;
+									}
+									Lampname[3] = 0;
+								}
+								for (i5 = 0; i5 <= 1; i5++)
+								{
+									if (i5 == 1)
+									{
+										for (byte index = 0; index <= 19; index++)
+										{
+											BFpierarray[index] = (Byte)convert(pierboolarray[index]);
+										}
+										Lampname[4] = 5;
+									}
+									else
+									{
+										for (byte index = 0; index <= 19; index++)
+										{
+											BFpierarray[index] = 0;
+										}
+										Lampname[4] = 0;
+									}
+									for (i6 = 0; i6 <= 1; i6++)
+									{
+										if (i6 == 1)
+										{
+											for (byte index = 0; index <= 19; index++)
+											{
+												BFstonearray[index] = (Byte)convert(stoneboolarray[index]);
+											}
+											Lampname[5] = 6;
+										}
+										else
+										{
+											for (byte index = 0; index <= 19; index++)
+											{
+												BFstonearray[index] = 0;
+											}
+											Lampname[5] = 0;
+										}
+										for (i7 = 0; i7 <= 1; i7++)
+										{
+											if (i7 == 1)
+											{
+												for (byte index = 0; index <= 19; index++)
+												{
+													BFpagodaarray[index] = (Byte)convert(pagodaboolarray[index]);
+												}
+												Lampname[6] = 7;
+											}
+											else
+											{
+												for (byte index = 0; index <= 19; index++)
+												{
+													BFpagodaarray[index] = 0;
+												}
+												Lampname[6] = 0;
+											}
+											for (byte index = 0; index <= 19; index++)
+											{
+												Bruteforce[index] = (byte)(convert(defaultboolarray[index])) + BFtemplearray[index] + BFfurnacearray[index] + BFtreearray[index] + BFwaterfallarray[index] + BFpierarray[index] + BFstonearray[index] + BFpagodaarray[index];
+												if (Bruteforce[index] % 2 == 0)
+												{
+													Bruteforce[index] = 0;
+												}
+												else
+												{
+													Bruteforce[index] = 1;
+												}
+												lampon += (byte)Bruteforce[index];
+											}
+											if (lampon == i0 && i0 >= 15)
+											{
+												for (byte index = 0; index <= 5; index++)
+												{
+													switch (Lampname[index])
+													{
+														case 1:
+															buttontopress += "Храм\n";
+															break;
+														case 2:
+															buttontopress += "Печь\n";
+															break;
+														case 3:
+															buttontopress += "Дерево\n";
+															break;
+														case 4:
+															buttontopress += "Водопад\n";
+															break;
+														case 5:
+															buttontopress += "Пирс\n";
+															break;
+														case 6:
+															buttontopress += "Камень\n";
+															break;
+														case 7:
+															buttontopress += "Пагода\n";
+															break;
+													}
+												}
+												buttontopress += "Удалось найти комбинацию для " + lampon + " горящих фонарей";
+												MessageBox.Show(buttontopress, "Джекпот");
+												i1 = 1;
+												i2 = 1;
+												i3 = 1;
+												i4 = 1;
+												i5 = 1;
+												i6 = 1;
+												i7 = 1;
+												lampon = 0;
+												exit = true;
+											}
+											if (i0 < 15 && lampon != i0)
+											{
+												MessageBox.Show("Подбор менее 15 фонарей не имеет смысла. Идите нахуй\nВключен режим шуток от ильи, осторожно, опасность деградации", "Взлом жопы");
+												i1 = 1;
+												i2 = 1;
+												i3 = 1;
+												i4 = 1;
+												i5 = 1;
+												i6 = 1;
+												i7 = 1;
+												exit = true;
+											}
+											if (lampon != i0)
+											{
+												lampon = 0;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
