@@ -33,14 +33,15 @@ namespace DICE_LA_ALPHA
 		Byte[] BFpagodaarray = new Byte[20];
 		int[] Bruteforce = new int[20];
 		Byte[] Lampname = new byte[7];
+		
         public Form1()
         {
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
             checkboxarray[0] = checkBox1;
             checkboxarray[1] = checkBox2;
-            checkboxarray[2] = checkBox3;
-            checkboxarray[3] = checkBox4;
+            checkboxarray[2] = checkBox3; 
+			checkboxarray[3] = checkBox4;
             checkboxarray[4] = checkBox5;
             checkboxarray[5] = checkBox6;
             checkboxarray[6] = checkBox7;
@@ -62,17 +63,22 @@ namespace DICE_LA_ALPHA
                 box.CheckedChanged +=new EventHandler(CheckBoxes_CheckedChanged);
             }
 		}
-
-        private void CheckBoxes_CheckedChanged(Object sender, EventArgs e)
+		private void Form1_Load(object sender, EventArgs e)
 		{
-			listBox1.Items.Clear();
+			ToolTip clear = new ToolTip();
+			clear.SetToolTip(button1, "Начать перебор комбинации кнопок, которые включат наибольшее количество фонарей");
+			clear.SetToolTip(button2, "Очистить текущие значения выбранной кнопки");
+			clear.SetToolTip(button3, "Очистить все значения для всех кнопок");
+
+		}
+		private void CheckBoxes_CheckedChanged(Object sender, EventArgs e)
+		{
 			switch (comboBox1.Text)
 			{
 				case "Горит изначально":
 					for (byte index = 0; index <= 19; index++)
 					{
 						defaultboolarray[index] = checkboxarray[index].Checked;
-						listBox1.Items.Add("ГИ " + defaultboolarray[index]);
 						if (checkboxarray[index].Checked == true)
 						{
 							checkboxarray[index].BackColor = Color.Orange;
@@ -87,56 +93,46 @@ namespace DICE_LA_ALPHA
 					for (byte index = 0; index <= 19; index++)
 					{
 						templeboolarray[index] = checkboxarray[index].Checked;
-						listBox1.Items.Add("ХР " + templeboolarray[index]);
 					}
 					break;
 				case "Печь":
 					for (byte index = 0; index <= 19; index++)
 					{
 						furnaceboolarray[index] = checkboxarray[index].Checked;
-						listBox1.Items.Add("ПЕ " + furnaceboolarray[index]);
 					}
 					break;
 				case "Дерево":
 					for (byte index = 0; index <= 19; index++)
 					{
 						treeboolarray[index] = checkboxarray[index].Checked;
-						listBox1.Items.Add("ДЕ " + treeboolarray[index]);
 					}
 					break;
 				case "Водопад":
 					for (byte index = 0; index <= 19; index++)
 					{
 						waterfallboolarray[index] = checkboxarray[index].Checked;
-						listBox1.Items.Add("ВО " + waterfallboolarray[index]);
 					}
 					break;
 				case "Пирс":
 					for (byte index = 0; index <= 19; index++)
 					{
 						pierboolarray[index] = checkboxarray[index].Checked;
-						listBox1.Items.Add("ПИ " + pierboolarray[index]);
 					}
 					break;
 				case "Камень":
 					for (byte index = 0; index <= 19; index++)
 					{
 						stoneboolarray[index] = checkboxarray[index].Checked;
-						listBox1.Items.Add("КА " + stoneboolarray[index]);
 					}
 					break;
 				case "Пагода":
 					for (byte index = 0; index <= 19; index++)
 					{
 						pagodaboolarray[index] = checkboxarray[index].Checked;
-						listBox1.Items.Add("ПА " + pagodaboolarray[index]);
 					}
 					break;
 			}
-
 		}
-
-
 		private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			foreach (CheckBox box in checkboxarray)
@@ -146,7 +142,6 @@ namespace DICE_LA_ALPHA
 					box.CheckedChanged -= new EventHandler(CheckBoxes_CheckedChanged);
 				}
 			}
-			listBox1.Items.Clear();
 			for (byte index = 0; index <= 19; index++)
 			{ 
 				switch (comboBox1.Text)
@@ -157,42 +152,34 @@ namespace DICE_LA_ALPHA
 							checkboxarray[index].Checked = false;
 							checkboxarray[index].Checked = defaultboolarray[index];
 						}
-						listBox1.Items.Add("ГИ " + defaultboolarray[index]);
 						break;
 					case "Храм":
 						checkboxarray[index].Checked = false;
 						checkboxarray[index].Checked = templeboolarray[index];
-						listBox1.Items.Add("ХР " + templeboolarray[index]);
 						break;
 					case "Печь":
 						checkboxarray[index].Checked = false;
 						checkboxarray[index].Checked = furnaceboolarray[index];
-						listBox1.Items.Add("ПЕ " + furnaceboolarray[index]);
 						break;
 					case "Дерево":
 						checkboxarray[index].Checked = false;
 						checkboxarray[index].Checked = treeboolarray[index];
-						listBox1.Items.Add("ДЕ " + treeboolarray[index]);
 						break;
 					case "Водопад":
 						checkboxarray[index].Checked = false;
 						checkboxarray[index].Checked = waterfallboolarray[index];
-						listBox1.Items.Add("ВО " + waterfallboolarray[index]);
 						break;
 					case "Пирс":
 						checkboxarray[index].Checked = false;
 						checkboxarray[index].Checked = pierboolarray[index];
-						listBox1.Items.Add("ПИ " + pierboolarray[index]);
 						break;
 					case "Камень":
 						checkboxarray[index].Checked = false;
 						checkboxarray[index].Checked = stoneboolarray[index];
-						listBox1.Items.Add("КА " + stoneboolarray[index]);
 						break;
 					case "Пагода":
 						checkboxarray[index].Checked = false;
 						checkboxarray[index].Checked = pagodaboolarray[index];
-						listBox1.Items.Add("ПА " + pagodaboolarray[index]);
 						break;
 				}
 			}
@@ -210,7 +197,9 @@ namespace DICE_LA_ALPHA
 			byte lampon=0;
 			string buttontopress="";
 			bool exit = false;
-			Func<Boolean, char> convert = x => x == false ? '0' : '1';
+			bool next= false;
+			int emptycheck = 0;
+			Func<Boolean, int> convert = x => x == false ? (0) : (1);
 			byte i0 = 0;
 			byte i1 = 0;
 			byte i2 = 0;
@@ -219,6 +208,15 @@ namespace DICE_LA_ALPHA
 			byte i5 = 0;
 			byte i6 = 0;
 			byte i7 = 0;
+			for (byte index = 0; index <= 19; index++)
+			{
+				emptycheck += convert(defaultboolarray[index]) + convert(templeboolarray[index]) + convert(furnaceboolarray[index]) + convert(treeboolarray[index]) + convert(waterfallboolarray[index]) + convert(pierboolarray[index]) + convert(stoneboolarray[index]) + convert(pagodaboolarray[index]);
+			}
+			if (emptycheck == 0)
+			{
+				labelresult.Text = "Все элементы пусты";
+				exit = true;
+			}
 			for (i0 = 20; i0 > 0; i0--)
 			{
 				if (exit == true)
@@ -354,7 +352,7 @@ namespace DICE_LA_ALPHA
 											}
 											for (byte index = 0; index <= 19; index++)
 											{
-												Bruteforce[index] = (byte)(convert(defaultboolarray[index])) + BFtemplearray[index] + BFfurnacearray[index] + BFtreearray[index] + BFwaterfallarray[index] + BFpierarray[index] + BFstonearray[index] + BFpagodaarray[index];
+												Bruteforce[index] = convert(defaultboolarray[index]) + BFtemplearray[index] + BFfurnacearray[index] + BFtreearray[index] + BFwaterfallarray[index] + BFpierarray[index] + BFstonearray[index] + BFpagodaarray[index];
 												if (Bruteforce[index] % 2 == 0)
 												{
 													Bruteforce[index] = 0;
@@ -365,9 +363,11 @@ namespace DICE_LA_ALPHA
 												}
 												lampon += (byte)Bruteforce[index];
 											}
-											if (lampon == i0 && i0 >= 15)
+											if (lampon == i0)
 											{
-												for (byte index = 0; index <= 5; index++)
+												buttontopress += "Комбинация для " + lampon + " фонарей найдена:\n\n";
+
+												for (byte index = 0; index <= 6; index++)
 												{
 													switch (Lampname[index])
 													{
@@ -394,8 +394,7 @@ namespace DICE_LA_ALPHA
 															break;
 													}
 												}
-												buttontopress += "Удалось найти комбинацию для " + lampon + " горящих фонарей";
-												MessageBox.Show(buttontopress, "Джекпот");
+												labelresult.Text = buttontopress;
 												i1 = 1;
 												i2 = 1;
 												i3 = 1;
@@ -406,17 +405,24 @@ namespace DICE_LA_ALPHA
 												lampon = 0;
 												exit = true;
 											}
-											if (i0 < 15 && lampon != i0)
+											if (i0 < 15 && lampon != i0 && next == false)
 											{
-												MessageBox.Show("Подбор менее 15 фонарей не имеет смысла. Идите нахуй\nВключен режим шуток от ильи, осторожно, опасность деградации", "Взлом жопы");
-												i1 = 1;
-												i2 = 1;
-												i3 = 1;
-												i4 = 1;
-												i5 = 1;
-												i6 = 1;
-												i7 = 1;
-												exit = true;
+												DialogResult dialog = MessageBox.Show("Комбинации с 15 или более рабочими фонарями не найдена, менее 15 включенных фонарей смысла не имеют.\nПоказать следующие комбинации которые будут найдены?", "Продолжать перебор?", MessageBoxButtons.YesNo);
+												if (dialog == DialogResult.No)
+												{
+													i1 = 1;
+													i2 = 1;
+													i3 = 1;
+													i4 = 1;
+													i5 = 1;
+													i6 = 1;
+													i7 = 1;
+													exit = true;
+												}
+												else if (dialog == DialogResult.Yes)
+												{
+													next = true;
+												}
 											}
 											if (lampon != i0)
 											{
@@ -430,6 +436,70 @@ namespace DICE_LA_ALPHA
 					}
 				}
 			}
+			if (exit == false)
+			{
+				labelresult.Text = "Подбор окончен\nКомбинация не найдена\n\nПерепроверьте правильность заполнения результатов работы кнопок";
+			}
+		}
+		private void Button2_Click(object sender, EventArgs e)
+		{
+			for (byte index = 0; index <= 19; index++)
+			{
+				checkboxarray[index].Checked = false;
+				switch (comboBox1.Text)
+				{
+					case "Горит изначально":
+							defaultboolarray[index] = false;
+						break;
+					case "Храм":
+							templeboolarray[index] = false;
+						break;
+					case "Печь":
+							furnaceboolarray[index] = false;
+						break;
+					case "Дерево":
+							treeboolarray[index] = false;
+						break;
+					case "Водопад":
+							waterfallboolarray[index] = false;
+						break;
+					case "Пирс":
+							pierboolarray[index] = false;
+						break;
+					case "Камень":
+							stoneboolarray[index] = false;
+						break;
+					case "Пагода":
+							pagodaboolarray[index] = false;
+						break;
+				}
+			}
+		}
+		private void Button3_Click(object sender, EventArgs e)
+		{
+			DialogResult dialog = MessageBox.Show("Вы уверены что хотите стереть все данные о всех кнопках?","Осторожно", MessageBoxButtons.YesNo);
+			if (dialog == DialogResult.Yes)
+			{
+				for (byte index = 0; index <= 19; index++)
+				{
+					checkboxarray[index].Checked = false;
+					checkboxarray[index].BackColor = SystemColors.Control;
+					defaultboolarray[index] = false;
+					templeboolarray[index] = false;
+					furnaceboolarray[index] = false;
+					treeboolarray[index] = false;
+					waterfallboolarray[index] = false;
+					pierboolarray[index] = false;
+					stoneboolarray[index] = false;
+					pagodaboolarray[index] = false;
+				}
+			}
+		}
+
+		private void Form1_HelpButtonClicked(object sender, CancelEventArgs e)
+		{
+			MessageBox.Show("Donov Roman\nVetrov Vladimir\nThanks to DICE and all Battlefield 4 developers\nApril 2019", "About");
+			e.Cancel = true;
 		}
 	}
 }
